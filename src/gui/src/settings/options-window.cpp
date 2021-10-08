@@ -233,7 +233,7 @@ OptionsWindow::OptionsWindow(Profile *profile, ThemeLoader *themeLoader, QWidget
 		ui->checkKeepDate->setChecked(settings->value("keepDate", true).toBool());
 		ui->checkSaveHeaderDetection->setChecked(settings->value("headerDetection", true).toBool());
 		ui->lineFolder->setText(settings->value("path_real").toString());
-		ui->lineFolderFavorites->setText(settings->value("path_favorites").toString());
+		ui->lineFolderSaveGroupHome->setText(settings->value("path_save_group_home").toString());
 		QStringList md5Duplicates { "save", "copy", "move", "ignore" };
 		md5Duplicates.append(linkKeys);
 		ui->comboMd5Duplicates->addItems(linkValues);
@@ -257,7 +257,7 @@ OptionsWindow::OptionsWindow(Profile *profile, ThemeLoader *themeLoader, QWidget
 		#endif
 
 		ui->lineFilename->setText(settings->value("filename_real").toString());
-		ui->lineFavorites->setText(settings->value("filename_favorites").toString());
+		ui->lineInSaveGroup->setText(settings->value("filename_in_save_group").toString());
 		ui->lineSeparator->setText(settings->value("separator", " ").toString());
 		ui->checkNoJpeg->setChecked(settings->value("noJpeg", true).toBool());
 
@@ -461,9 +461,9 @@ void OptionsWindow::on_buttonFolder_clicked()
 }
 void OptionsWindow::on_buttonFolderFavorites_clicked()
 {
-	QString folder = QFileDialog::getExistingDirectory(this, tr("Choose a save folder for favorites"), ui->lineFolderFavorites->text());
+	QString folder = QFileDialog::getExistingDirectory(this, tr("Choose a save folder for favorites"), ui->lineFolderSaveGroupHome->text());
 	if (!folder.isEmpty()) {
-		ui->lineFolderFavorites->setText(folder);
+		ui->lineFolderSaveGroupHome->setText(folder);
 	}
 }
 void OptionsWindow::on_buttonTempPathOverride_clicked()
@@ -483,8 +483,8 @@ void OptionsWindow::on_buttonFilenamePlus_clicked()
 }
 void OptionsWindow::on_buttonFavoritesPlus_clicked()
 {
-	FilenameWindow *fw = new FilenameWindow(m_profile, ui->lineFavorites->text(), this);
-	connect(fw, &FilenameWindow::validated, ui->lineFavorites, &QLineEdit::setText);
+	FilenameWindow *fw = new FilenameWindow(m_profile, ui->lineInSaveGroup->text(), this);
+	connect(fw, &FilenameWindow::validated, ui->lineInSaveGroup, &QLineEdit::setText);
 	setupDialogShortcuts(fw, m_profile->getSettings());
 	fw->show();
 }
@@ -1068,8 +1068,8 @@ void OptionsWindow::save()
 				pth.mkpath(folder);
 			}
 		}
-		folder = fixFilename("", ui->lineFolderFavorites->text());
-		settings->setValue("path_favorites", folder);
+		folder = fixFilename("", ui->lineFolderSaveGroupHome->text());
+		settings->setValue("path_save_group_home", folder);
 		pth = QDir(folder);
 		if (!pth.exists()) {
 			QString op;
@@ -1078,7 +1078,7 @@ void OptionsWindow::save()
 				pth.setPath(pth.path().remove(QRegularExpression("/([^/]+)$")));
 			}
 			if (pth.path() == op) {
-				error(this, tr("An error occured creating the favorites save folder."));
+				error(this, tr("An error occured creating the save group home folder."));
 			} else {
 				pth.mkpath(folder);
 			}
@@ -1104,7 +1104,7 @@ void OptionsWindow::save()
 
 		settings->setValue("filename", ui->lineFilename->text());
 		settings->setValue("filename_real", ui->lineFilename->text());
-		settings->setValue("filename_favorites", ui->lineFavorites->text());
+		settings->setValue("filename_in_save_group", ui->lineInSaveGroup->text());
 
 		for (TokenSettingsWidget *tokenSettings : m_tokenSettings) {
 			tokenSettings->save();

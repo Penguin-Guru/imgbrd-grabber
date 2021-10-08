@@ -524,8 +524,8 @@ void ZoomWindow::openSaveDir(bool fav)
 	if (!m_source.isEmpty()) {
 		showInGraphicalShell(m_source);
 	} else {
-		const QString path = m_settings->value("Save/path" + QString(fav ? "_favorites" : "")).toString();
-		const QString fn = m_settings->value("Save/filename" + QString(fav ? "_favorites" : "")).toString();
+		const QString path = m_settings->value("Save/path" + QString(fav ? "_save_group_home" : "")).toString();
+		const QString fn = m_settings->value("Save/filename" + QString(fav ? "_in_save_group" : "")).toString();
 
 		const QStringList files = m_image->paths(fn, path, 0);
 		const QString url = !files.empty() ? files.first() : path;
@@ -669,8 +669,8 @@ void ZoomWindow::replyFinishedDetails()
 		}
 	}
 
-	const QString path2 = m_settings->value("Save/path_favorites").toString().replace("\\", "/");
-	const QStringList pth2s = m_image->paths(m_settings->value("Save/filename_favorites").toString(), path2, 0);
+	const QString path2 = m_settings->value("Save/path_save_group_home").toString().replace("\\", "/");
+	const QStringList pth2s = m_image->paths(m_settings->value("Save/filename_in_save_group").toString(), path2, 0);
 	QString source2;
 	for (const QString &pth2 : pth2s) {
 		QFile file(pth2);
@@ -833,7 +833,7 @@ void ZoomWindow::pendingUpdate()
 	// If the image is loaded but we need their tags and we don't have them, we wait
 	if (m_pendingAction != PendingSaveAs) {
 		const bool fav = m_pendingAction == PendingSaveFav;
-		Filename fn(m_settings->value("Save/path" + QString(fav ? "_favorites" : "")).toString());
+		Filename fn(m_settings->value("Save/path" + QString(fav ? "_save_group_home" : "")).toString());
 
 		if (!m_loadedDetails && fn.needExactTags(m_site, m_settings) != 0) {
 			return;
@@ -994,8 +994,8 @@ void ZoomWindow::saveImageNow()
 	}
 
 	const bool fav = m_pendingAction == PendingSaveFav;
-	QString fn = m_settings->value("Save/filename" + QString(fav ? "_favorites" : "")).toString();
-	QString pth = m_settings->value("Save/path" + QString(fav ? "_favorites" : "")).toString().replace("\\", "/");
+	QString fn = m_settings->value("Save/filename" + QString(fav ? "_in_save_group" : "")).toString();
+	QString pth = m_settings->value("Save/path" + QString(fav ? "_save_group_home" : "")).toString().replace("\\", "/");
 	if (pth.right(1) == "/") {
 		pth = pth.left(pth.length() - 1);
 	}

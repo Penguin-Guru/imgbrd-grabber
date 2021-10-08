@@ -695,14 +695,14 @@
         <item row="6" column="0">
          <widget class="QLabel" name="label_62">
           <property name="text">
-           <string>Favorites</string>
+           <string>Save group home</string>
           </property>
          </widget>
         </item>
         <item row="6" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_13">
           <item>
-           <widget class="QLineEdit" name="lineFolderFavorites"/>
+           <widget class="QLineEdit" name="lineFolderSaveGroupHome"/>
           </item>
           <item>
            <widget class="QPushButton" name="buttonFolderFavorites">
@@ -946,14 +946,14 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_61">
           <property name="text">
-           <string>Favorites</string>
+           <string>In save group</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
-           <widget class="QLineEdit" name="lineFavorites"/>
+           <widget class="QLineEdit" name="lineInSaveGroup"/>
           </item>
           <item>
            <widget class="QPushButton" name="buttonFavoritesPlus">
@@ -1703,8 +1703,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>495</width>
-             <height>562</height>
+             <width>308</width>
+             <height>417</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -2323,8 +2323,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>474</width>
-             <height>710</height>
+             <width>226</width>
+             <height>810</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -5335,6 +5335,29 @@
   <tabstop>lineColoringIgnoreds</tabstop>
   <tabstop>buttonColoringIgnoredsColor</tabstop>
   <tabstop>buttonColoringIgnoredsFont</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>comboLanguages</tabstop>
+  <tabstop>comboStart</tabstop>
+  <tabstop>lineWhitelist</tabstop>
+  <tabstop>comboWhitelist</tabstop>
+  <tabstop>lineAdd</tabstop>
+  <tabstop>spinImagesPerPage</tabstop>
+  <tabstop>spinColumns</tabstop>
+  <tabstop>checkUseregexfortags</tabstop>
+  <tabstop>comboSource1</tabstop>
+  <tabstop>comboSource2</tabstop>
+  <tabstop>comboSource3</tabstop>
+  <tabstop>comboSource4</tabstop>
+  <tabstop>checkShowLog</tabstop>
+  <tabstop>checkDownloadOriginals</tabstop>
+  <tabstop>checkAutodownload</tabstop>
+  <tabstop>lineFolderSaveGroupHome</tabstop>
+  <tabstop>buttonFolderFavorites</tabstop>
+  <tabstop>spinSimultaneous</tabstop>
+  <tabstop>lineFilename</tabstop>
+  <tabstop>buttonFilenamePlus</tabstop>
+  <tabstop>lineInSaveGroup</tabstop>
+  <tabstop>buttonFavoritesPlus</tabstop>
   <tabstop>spinMainMargins</tabstop>
   <tabstop>spinServerBorders</tabstop>
   <tabstop>lineBorderColor</tabstop>
